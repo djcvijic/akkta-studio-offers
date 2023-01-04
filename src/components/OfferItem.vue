@@ -3,7 +3,8 @@
         <td>{{ itemIndex + 1 }}</td>
         <td>
             <img :src="imageData.uri"/>
-            <input type="file" accept="image/png, image/gif, image/jpeg" @change="onUploadImage"/>
+            <label for="imageUpload">Izaberi sliku</label>
+            <input id="imageUpload" type="file" style="display: none;" accept="image/png, image/gif, image/jpeg" @change="onUploadImage"/>
         </td>
         <td><EditableSpan :value="value.patternPrice" @input="newValue => emitInput('patternPrice', newValue)"/> EUR</td>
         <td><EditableSpan :value="value.modelPrice" @input="newValue => emitInput('modelPrice', newValue)"/> EUR</td>
@@ -87,5 +88,13 @@ td {
 
 td > img {
     height: 150px;
+}
+
+td > label {
+    display: block;
+    border: 1px solid #000;
+    cursor: pointer;
+    padding: 5px;
+    text-align: center;
 }
 </style>
