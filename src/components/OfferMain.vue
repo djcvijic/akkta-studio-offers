@@ -38,10 +38,12 @@
 </template>
 
 <script>
+import saveState from 'vue-save-state';
 import OfferItem from './OfferItem.vue';
 
 export default {
   name: 'OfferMain',
+  mixins: [saveState],
   components: {
     OfferItem
   },
@@ -100,6 +102,11 @@ export default {
   methods: {
     onChangeImage(itemIndex, newImageData) {
         this.$set(this.offerImages, itemIndex, newImageData);
+    },
+    getSaveStateConfig() {
+        return {
+            cacheKey: 'AkktaStudioOffers',
+        };
     },
   },
 }
