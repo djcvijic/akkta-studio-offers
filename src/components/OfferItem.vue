@@ -1,45 +1,76 @@
 <template>
     <tr>
-        <td>{{ itemIndex }}</td>
+        <td>{{ itemIndex + 1 }}</td>
         <td>
-            <img src="@/assets/images/image-000.png"/>
+            <img :src="imageData.uri"/>
+            <input type="file" accept="image/png, image/gif, image/jpeg" @change="onUploadImage"/>
         </td>
-        <td>{{ patternPrice }} EUR</td>
-        <td>{{ modelPrice }} EUR</td>
-        <td>{{ samplePrice }} EUR</td>
-        <td>{{ totalPrice }} EUR</td>
+        <td><EditableSpan :value="value.patternPrice" @input="newValue => emitInput('patternPrice', newValue)"/> EUR</td>
+        <td><EditableSpan :value="value.modelPrice" @input="newValue => emitInput('modelPrice', newValue)"/> EUR</td>
+        <td><EditableSpan :value="value.samplePrice" @input="newValue => emitInput('samplePrice', newValue)"/> EUR</td>
+        <td>{{ value.totalPrice }} EUR</td>
     </tr>
 </template>
 
 <script>
+import EditableSpan from './EditableSpan.vue';
+
 export default {
   name: 'OfferItem',
+  components: {
+    EditableSpan,
+  },
   props: {
     itemIndex: {
         type: Number,
         default: 0,
     },
+    value: {
+        type: Object,
+        default() {
+            return  {
+                patternPrice: 0,
+                modelPrice: 0,
+                samplePrice: 0,
+                totalPrice: 0,
+            };
+        },
+    },
     imageData: {
-        type: String,
-        default: '',
-    },
-    patternPrice: {
-        type: Number,
-        default: 0,
-    },
-    modelPrice: {
-        type: Number,
-        default: 0,
-    },
-    samplePrice: {
-        type: Number,
-        default: 0,
+        type: Object,
+        default() {
+            return {
+                uri: '',
+            };
+        },
     },
   },
-  computed: {
-    totalPrice() {
-        return this.patternPrice + this.modelPrice + this.samplePrice;
-    }
+  computed: {},
+  methods: {
+    onUploadImage(event) {
+        const fileReader = new FileReader();
+        const callback = this.emitChangeImage;
+        fileReader.onloadend = function () {
+            const newImageUri = fileReader.result;
+            callback(newImageUri);
+        };
+
+        const files = event.target.files;
+        if (files.length > 0) {
+            fileReader.readAsDataURL(files[0]);
+        }
+    },
+    emitChangeImage(newImageUri) {
+        const newImageData = Object.assign({}, this.imageData);
+        newImageData.uri = newImageUri
+        this.$emit('changeImage', newImageData);
+    },
+    emitInput(key, newValue) {
+        const newModel = Object.assign({}, this.value);
+        newModel[key] = parseInt(newValue);
+        newModel.totalPrice = newModel.patternPrice + newModel.modelPrice + newModel.samplePrice;
+        this.$emit('input', newModel);
+    },
   }
 }
 </script>
