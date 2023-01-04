@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'OffersMenu',
+  name: 'OfferMenu',
   props: {}
 }
 </script>

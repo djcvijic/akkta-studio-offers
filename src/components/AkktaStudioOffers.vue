@@ -1,19 +1,19 @@
 <template>
   <div id="akkta-studio-offers">
-    <OffersMenu/>
-    <OffersMain/>
+    <OfferMenu/>
+    <OfferMain/>
   </div>
 </template>
 
 <script>
-import OffersMenu from './OffersMenu.vue'
-import OffersMain from './OffersMain.vue'
+import OfferMenu from './OfferMenu.vue'
+import OfferMain from './OfferMain.vue'
 
 export default {
   name: 'AkktaStudioOffers',
   components: {
-    OffersMenu,
-    OffersMain,
+    OfferMenu,
+    OfferMain,
   },
   props: {
     msg: String
