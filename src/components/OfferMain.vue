@@ -14,12 +14,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <OfferItem/>
-                    <OfferItem/>
-                    <OfferItem/>
-                    <OfferItem/>
-                    <OfferItem/>
-                    <OfferItem/>
+                    <OfferItem :item-index="1" :image-data="''" :pattern-price="95" :model-price="170" :sample-price="170"/>
+                    <OfferItem :item-index="2" :image-data="''" :pattern-price="185" :model-price="260" :sample-price="260"/>
+                    <OfferItem :item-index="3" :image-data="''" :pattern-price="95" :model-price="170" :sample-price="170"/>
+                    <OfferItem :item-index="4" :image-data="''" :pattern-price="105" :model-price="170" :sample-price="170"/>
+                    <OfferItem :item-index="5" :image-data="''" :pattern-price="70" :model-price="170" :sample-price="170"/>
+                    <OfferItem :item-index="6" :image-data="''" :pattern-price="110" :model-price="170" :sample-price="170"/>
                 </tbody>
                 <tfoot>
                     <tr>
