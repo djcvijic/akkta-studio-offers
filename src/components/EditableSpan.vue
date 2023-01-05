@@ -11,20 +11,20 @@ export default {
     name: 'EditableSpan',
     props: {
         value: {
-        default: '',
+            default: '',
         },
     },
     computed: {
         listeners() {
-        return { ...this.$listeners, input: this.onInput };
+            return { ...this.$listeners, input: this.onInput };
         },
     },
-    mounted() {
+    updated() {
         this.$refs.editable.innerText = this.value;
     },
     methods: {
         onInput(e) {
-        this.$emit('input', e.target.innerText);
+            this.$emit('input', e.target.innerText);
         },
     },
 };
