@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <AkktaStudioOffers msg="Welcome to Your Vue.js App"/>
+    <OfferMain/>
   </div>
 </template>
 
 <script>
-import AkktaStudioOffers from './components/AkktaStudioOffers.vue'
+import OfferMain from './components/OfferMain.vue'
 
 export default {
   name: 'App',
   components: {
-    AkktaStudioOffers
+    OfferMain
   }
 }
 </script>
