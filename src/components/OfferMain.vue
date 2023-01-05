@@ -189,6 +189,7 @@ export default {
 
 .content > table {
     width: 100%;
+    table-layout: fixed;
 }
 
 .content > table, .content > table th {
@@ -200,9 +201,12 @@ export default {
     padding: 10px;
 }
 
-.content > table img {
-    height: 150px;
-}
+.content > table th:nth-child(1) { width: 7.5%; }
+.content > table th:nth-child(2) { width: 22.5%; }
+.content > table th:nth-child(3) { width: 17.5%; }
+.content > table th:nth-child(4) { width: 17.5%; }
+.content > table th:nth-child(5) { width: 17.5%; }
+.content > table th:nth-child(6) { width: 17.5%; }
 
 .disabledLink {
     color: currentColor;
