@@ -10,14 +10,14 @@
                 :download="!!offerName ? `${offerName}.bin` : false"
                 :class="!!offerName ? '' : 'disabledLink'"
             >
-                Sacuvaj ponudu
+                Sačuvaj ponudu
             </a>
             <label>
-                Ucitaj ponudu
+                Učitaj ponudu
                 <input type="file" style="display: none;" accept="application/octet-stream" @change="loadOffer"/>
             </label>
             <label>
-                Stampaj ponudu
+                Štampaj ponudu
                 <input type="button" style="display: none;" @click="printOffer"/>
             </label>
             <label>
@@ -40,7 +40,7 @@
                 </p>
                 <p>
                     <ul>
-                        <li>Digitalni šablon modela i prateća tehnička dokumentacija u dogovorenoj velicini</li>
+                        <li>Digitalni šablon modela i prateća tehnička dokumentacija u dogovorenoj veličini</li>
                         <li>Izrada makete modela za fiting i korekcije</li>
                         <li>Izrada nultog uzorka modela za slikanje i proizvodnju u industriji</li>
                     </ul>
@@ -70,9 +70,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>
-                            <span class="addItem" @click="addItem">+</span>
-                        </th>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -81,14 +79,15 @@
                     </tr>
                 </tfoot>
             </table>
+            <span class="addItem" @click="addItem">Dodaj</span>
         </div>
         <div class="contract">
             <p>
                 Rok za izradu kolekcije bi bio oko <EditableSpan v-model="dueDate"/>. Dinamika fitinga se dogovara u toku rada.
-                <br/>Nakon prihvatanja ponude neophodna je uplata avansa u iznosu od 40% od cene. Ostatak isplate je nakon zavrsetka kolekcije.
-                <br/>Klijent obezbedjuje materijale i pozamanteriju za izradu kolekcije u dogovorenom terminu.
-                <br/>Gradiranje kolekcije je moguce u zeljenim velicinama i mozemo dati ponudu prema vasem zahtevu.
-                <br/>Svaka izmena dizajna nakon finalnog dogovora se dodatno naplacuje.
+                <br/>Nakon prihvatanja ponude neophodna je uplata avansa u iznosu od 40% od cene. Ostatak isplate je nakon završetka kolekcije.
+                <br/>Klijent obezbeđuje materijale i pozamanteriju za izradu kolekcije u dogovorenom terminu.
+                <br/>Gradiranje kolekcije je moguće u željenim veličinama i možemo dati ponudu prema vašem zahtevu.
+                <br/>Svaka izmena dizajna nakon finalnog dogovora se dodatno naplaćuje.
             </p>
             <div class="contractSignatures">
                 <div>
@@ -97,7 +96,7 @@
                     <br/>
                     <br/>
                     <hr/>
-                    <p>Tatjana Vuleta Djukanov</p>
+                    <p>Tatjana Vuleta Đukanov</p>
                 </div>
                 <div></div>
                 <div>
@@ -223,7 +222,7 @@ export default {
 }
 
 .addItem {
-    display: inline;
+    display: inline-block;
     border: 1px solid #000;
     cursor: pointer;
     padding: 5px;

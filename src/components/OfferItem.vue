@@ -14,7 +14,7 @@
         <td>
             {{ value.totalPrice }} EUR
         </td>
-        <span class="removeItem" @click="removeItem">X</span>
+        <span class="removeItem" @click="removeItem">Obriši</span>
     </tr>
 </template>
 
