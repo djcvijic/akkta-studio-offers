@@ -77,7 +77,42 @@
                 </tfoot>
             </table>
         </div>
-        <div class="footer"></div>
+        <div class="contract">
+            <p>
+                Rok za izradu kolekcije bi bio oko <EditableSpan v-model="dueDate"/>. Dinamika fitinga se dogovara u toku rada.
+                <br/>Nakon prihvatanja ponude neophodna je uplata avansa u iznosu od 40% od cene. Ostatak isplate je nakon zavrsetka kolekcije.
+                <br/>Klijent obezbedjuje materijale i pozamanteriju za izradu kolekcije u dogovorenom terminu.
+                <br/>Gradiranje kolekcije je moguce u zeljenim velicinama i mozemo dati ponudu prema vasem zahtevu.
+                <br/>Svaka izmena dizajna nakon finalnog dogovora se dodatno naplacuje.
+            </p>
+            <div class="contractSignatures">
+                <div>
+                    <p>AKKTA STUDIO:</p>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <hr/>
+                    <p>Tatjana Vuleta Djukanov</p>
+                </div>
+                <div></div>
+                <div>
+                    <p><EditableSpan v-model="clientName"/>:</p>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <hr/>
+                    <p>(POTPIS)</p>
+                </div>
+                <div>
+                    <p><EditableSpan v-model="associateCompany"/>:</p>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <hr/>
+                    <p><EditableSpan v-model="associate"/></p>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -137,6 +172,10 @@ function initialState() {
             { uri: '' },
             { uri: '' },
         ],
+        dueDate: 'DATUM',
+        clientName: 'KLIJENT',
+        associateCompany: 'FIRMA SARADNIKA',
+        associate: 'SARADNIK',
     }
 }
 
@@ -202,13 +241,20 @@ export default {
 </script>
 
 <style scoped>
+.disabledLink {
+    color: currentColor;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+}
+
 .main {
     margin: auto;
     width: 800px;
 }
 
 .main > * {
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 
 .menu > * {
@@ -219,6 +265,12 @@ export default {
     cursor: pointer;
     padding: 5px;
     text-align: center;
+}
+
+@media print {
+    .menu {
+        display: none;
+    }
 }
 
 .header {
@@ -276,16 +328,14 @@ export default {
 .content > table th:nth-child(5) { width: 17.5%; }
 .content > table th:nth-child(6) { width: 15%; }
 
-.disabledLink {
-    color: currentColor;
-    cursor: not-allowed;
-    opacity: 0.5;
-    text-decoration: none;
+.contract {
+    page-break-inside: avoid;
 }
 
-@media print {
-    .menu {
-        display: none;
-    }
+.contractSignatures {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 60px;
 }
 </style>

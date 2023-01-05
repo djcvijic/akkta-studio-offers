@@ -33,8 +33,8 @@ export default {
 <style scoped>
 span {
     display: inline-block;
-    min-width: 20px;
-    border-bottom: 1px solid gray;
+    min-width: 30px;
+    border-bottom: 1px dashed gray;
     text-align: right;
 }
 
