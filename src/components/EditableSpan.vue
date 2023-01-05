@@ -31,10 +31,18 @@ export default {
 </script>
 
 <style scoped>
+span {
+    display: inline-block;
+    min-width: 20px;
+    border-bottom: 1px solid gray;
+    text-align: right;
+}
+
+@media print {
     span {
-        display: inline-block;
-        min-width: 20px;
-        border-bottom: 1px solid #000;
-        text-align: right;
+        min-width: 0;
+        border-bottom: none;
+        text-align: start;
     }
+}
 </style>

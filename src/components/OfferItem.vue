@@ -105,4 +105,10 @@ td > label {
     padding: 5px;
     text-align: center;
 }
+
+@media print {
+    td > label {
+        display: none;
+    }
+}
 </style>
