@@ -58,16 +58,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <OfferItem :item-index="0" v-model="offerItems[0]" :image-data="offerImages[0]" @changeImage="newImageData => onChangeImage(0, newImageData)"/>
-                    <OfferItem :item-index="1" v-model="offerItems[1]" :image-data="offerImages[1]" @changeImage="newImageData => onChangeImage(1, newImageData)"/>
-                    <OfferItem :item-index="2" v-model="offerItems[2]" :image-data="offerImages[2]" @changeImage="newImageData => onChangeImage(2, newImageData)"/>
-                    <OfferItem :item-index="3" v-model="offerItems[3]" :image-data="offerImages[3]" @changeImage="newImageData => onChangeImage(3, newImageData)"/>
-                    <OfferItem :item-index="4" v-model="offerItems[4]" :image-data="offerImages[4]" @changeImage="newImageData => onChangeImage(4, newImageData)"/>
-                    <OfferItem :item-index="5" v-model="offerItems[5]" :image-data="offerImages[5]" @changeImage="newImageData => onChangeImage(5, newImageData)"/>
+                    <OfferItem
+                        v-for="(_, index) in offerItems"
+                        :key="index"
+                        :item-index="index"
+                        v-model="offerItems[index]"
+                        :image-data="offerImages[index]"
+                        @changeImage="newImageData => onChangeImage(index, newImageData)"
+                        @remove="removeItem(index)"
+                    />
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th></th>
+                        <th>
+                            <span class="addItem" @click="addItem">+</span>
+                        </th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -126,52 +131,8 @@ function initialState() {
         offerName: '',
         offerDate: 'DATUM',
         offerTitle: 'NASLOV',
-        offerItems: [
-            {
-                patternPrice: 95,
-                modelPrice: 170,
-                samplePrice: 170,
-                totalPrice: 435,
-            },
-            {
-                patternPrice: 95,
-                modelPrice: 170,
-                samplePrice: 170,
-                totalPrice: 435,
-            },
-            {
-                patternPrice: 95,
-                modelPrice: 170,
-                samplePrice: 170,
-                totalPrice: 435,
-            },
-            {
-                patternPrice: 95,
-                modelPrice: 170,
-                samplePrice: 170,
-                totalPrice: 435,
-            },
-            {
-                patternPrice: 95,
-                modelPrice: 170,
-                samplePrice: 170,
-                totalPrice: 435,
-            },
-            {
-                patternPrice: 95,
-                modelPrice: 170,
-                samplePrice: 170,
-                totalPrice: 435,
-            },
-        ],
-        offerImages: [
-            { uri: '' },
-            { uri: '' },
-            { uri: '' },
-            { uri: '' },
-            { uri: '' },
-            { uri: '' },
-        ],
+        offerItems: [],
+        offerImages: [],
         dueDate: 'DATUM',
         clientName: 'KLIJENT',
         associateCompany: 'FIRMA SARADNIKA',
@@ -206,6 +167,19 @@ export default {
     },
     onChangeImage(itemIndex, newImageData) {
         this.$set(this.offerImages, itemIndex, newImageData);
+    },
+    addItem() {
+        this.offerItems.push({
+            patternPrice: 0,
+            modelPrice: 0,
+            samplePrice: 0,
+            totalPrice: 0,
+        });
+        this.offerImages.push({ uri: '' });
+    },
+    removeItem(index) {
+        this.offerItems.splice(index, 1);
+        this.offerImages.splice(index, 1);
     },
     loadOffer(event) {
         const fileReader = new FileReader();
@@ -246,6 +220,20 @@ export default {
     cursor: not-allowed;
     opacity: 0.5;
     text-decoration: none;
+}
+
+.addItem {
+    display: inline;
+    border: 1px solid #000;
+    cursor: pointer;
+    padding: 5px;
+    text-align: center;
+}
+
+@media print {
+    .addItem {
+        display: none;
+    }
 }
 
 .main {

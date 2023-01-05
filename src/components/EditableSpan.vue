@@ -20,7 +20,10 @@ export default {
         },
     },
     updated() {
-        this.$refs.editable.innerText = this.value;
+        if (this.value != this.$refs.editable.innerText)
+        {
+            this.$refs.editable.innerText = this.value;
+        }
     },
     methods: {
         onInput(e) {

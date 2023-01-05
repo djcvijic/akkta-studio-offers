@@ -11,7 +11,10 @@
         <td><EditableSpan :value="value.patternPrice" @input="newValue => emitInput('patternPrice', newValue)"/> EUR</td>
         <td><EditableSpan :value="value.modelPrice" @input="newValue => emitInput('modelPrice', newValue)"/> EUR</td>
         <td><EditableSpan :value="value.samplePrice" @input="newValue => emitInput('samplePrice', newValue)"/> EUR</td>
-        <td>{{ value.totalPrice }} EUR</td>
+        <td>
+            {{ value.totalPrice }} EUR
+        </td>
+        <span class="removeItem" @click="removeItem">X</span>
     </tr>
 </template>
 
@@ -79,17 +82,30 @@ export default {
         newModel.totalPrice = newModel.patternPrice + newModel.modelPrice + newModel.samplePrice;
         this.$emit('input', newModel);
     },
+    removeItem() {
+        this.$emit('remove');
+    },
   }
 }
 </script>
 
 <style scoped>
-td {
+.removeItem {
+    display: inline-block;
     border: 1px solid #000;
-    border-collapse: collapse;
+    cursor: pointer;
+    padding: 5px;
+}
+
+@media print {
+    .removeItem {
+        display: none;
+    }
 }
 
 td {
+    border: 1px solid #000;
+    border-collapse: collapse;
     padding: 15px;
 }
 
