@@ -25,7 +25,11 @@
                 <input type="button" style="display: none;" @click="clearOffer"/>
             </label>
         </div>
-        <div class="header"></div>
+        <div class="header">
+            <div>&mdash; AKKTA STUDIO &mdash;</div>
+            <div>Žitni trg bb, Zrenjanin</div>
+            <div><EditableSpan v-model="offerDate"/></div>
+        </div>
         <div class="content">
             <div>
                 <p>
@@ -85,6 +89,7 @@ import EditableSpan from './EditableSpan.vue';
 function initialState() {
     return {
         offerName: '',
+        offerDate: 'DATUM',
         offerTitle: 'NASLOV',
         offerItems: [
             {
@@ -202,6 +207,10 @@ export default {
     width: 800px;
 }
 
+.main > * {
+    margin-bottom: 15px;
+}
+
 .menu > * {
     display: block;
     width: 300px;
@@ -210,6 +219,15 @@ export default {
     cursor: pointer;
     padding: 5px;
     text-align: center;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+}
+
+.header > div:last-child {
+    text-align: right;
 }
 
 .content > div {
