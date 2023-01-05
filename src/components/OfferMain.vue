@@ -6,15 +6,15 @@
                 <input type="text" v-model="offerName"/>
             </label>
             <a
-                :href="!!offerName ? `data:application/json;charset=utf-8,${saveJson}` : 'javascript:;'"
-                :download="!!offerName ? `${offerName}.json` : false"
+                :href="!!offerName ? `data:application/octet-stream;base64,${saveJson}` : 'javascript:;'"
+                :download="!!offerName ? `${offerName}.bin` : false"
                 :class="!!offerName ? '' : 'disabledLink'"
             >
                 Sacuvaj ponudu
             </a>
             <label>
                 Ucitaj ponudu
-                <input type="file" style="display: none;" accept="application/json" @change="loadOffer"/>
+                <input type="file" style="display: none;" accept="application/octet-stream" @change="loadOffer"/>
             </label>
             <label>
                 Stampaj ponudu
@@ -85,7 +85,7 @@ import EditableSpan from './EditableSpan.vue';
 function initialState() {
     return {
         offerName: '',
-        offerTitle: 'Naslov ponude',
+        offerTitle: 'NASLOV',
         offerItems: [
             {
                 patternPrice: 95,
@@ -151,7 +151,7 @@ export default {
         return this.offerItems.reduce((total, item) => total + item.totalPrice, 0);
     },
     saveJson() {
-        return JSON.stringify(this.$data);
+        return btoa(JSON.stringify(this.$data));
     },
   },
   methods: {
