@@ -49,6 +49,11 @@ export default {
     },
   },
   computed: {},
+  mounted() {
+    const newModel = Object.assign({}, this.value);
+    newModel.totalPrice = newModel.patternPrice + newModel.modelPrice + newModel.samplePrice;
+    this.$emit('input', newModel);
+  },
   methods: {
     onUploadImage(event) {
         const fileReader = new FileReader();
