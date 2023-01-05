@@ -20,6 +20,10 @@
                 Kreiraj novu ponudu
                 <input type="button" style="display: none;" @click="clearOffer"/>
             </label>
+            <label>
+                Stampaj ponudu
+                <input type="button" style="display: none;" @click="printOffer"/>
+            </label>
         </div>
         <div class="header"></div>
         <div class="content">
@@ -167,6 +171,9 @@ export default {
             this.$data[key] = newOfferData[key];
         }
     },
+    printOffer() {
+        window.print();
+    },
   },
 }
 </script>
@@ -202,11 +209,11 @@ export default {
 }
 
 .content > table th:nth-child(1) { width: 7.5%; }
-.content > table th:nth-child(2) { width: 22.5%; }
+.content > table th:nth-child(2) { width: 25%; }
 .content > table th:nth-child(3) { width: 17.5%; }
 .content > table th:nth-child(4) { width: 17.5%; }
 .content > table th:nth-child(5) { width: 17.5%; }
-.content > table th:nth-child(6) { width: 17.5%; }
+.content > table th:nth-child(6) { width: 15%; }
 
 .disabledLink {
     color: currentColor;
