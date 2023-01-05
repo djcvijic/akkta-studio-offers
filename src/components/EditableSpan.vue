@@ -19,6 +19,9 @@ export default {
             return { ...this.$listeners, input: this.onInput };
         },
     },
+    mounted() {
+        this.$refs.editable.innerText = this.value;
+    },
     updated() {
         if (this.value != this.$refs.editable.innerText)
         {
