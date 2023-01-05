@@ -1,5 +1,26 @@
 <template>
     <div class="main">
+        <div class="menu">
+            <label>
+                Ime ponude:
+                <input type="text" v-model="offerName"/>
+            </label>
+            <a
+                :href="!!offerName ? `data:application/json;charset=utf-8,${saveJson}` : 'javascript:;'"
+                :download="!!offerName ? `${offerName}.json` : false"
+                :class="!!offerName ? '' : 'disabledLink'"
+            >
+                Sacuvaj ponudu
+            </a>
+            <label>
+                Ucitaj ponudu
+                <input type="file" style="display: none;" accept="application/json" @change="loadOffer"/>
+            </label>
+            <label>
+                Kreiraj novu ponudu
+                <input type="button" style="display: none;" @click="clearOffer"/>
+            </label>
+        </div>
         <div class="header"></div>
         <div class="content">
             <table>
@@ -28,7 +49,7 @@
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th>2880 EUR</th>
+                        <th>{{ grandTotalPrice }} EUR</th>
                     </tr>
                 </tfoot>
             </table>
@@ -41,15 +62,9 @@
 import saveState from 'vue-save-state';
 import OfferItem from './OfferItem.vue';
 
-export default {
-  name: 'OfferMain',
-  mixins: [saveState],
-  components: {
-    OfferItem
-  },
-  props: {},
-  data() {
+function initialState() {
     return {
+        offerName: '',
         offerItems: [
             {
                 patternPrice: 95,
@@ -96,8 +111,26 @@ export default {
             { uri: '' },
             { uri: '' },
         ],
-        grandTotalPrice: 0,
     }
+}
+
+export default {
+  name: 'OfferMain',
+  mixins: [saveState],
+  components: {
+    OfferItem
+  },
+  props: {},
+  data() {
+    return initialState();
+  },
+  computed: {
+    grandTotalPrice() {
+        return this.offerItems.reduce((total, item) => total + item.totalPrice, 0);
+    },
+    saveJson() {
+        return JSON.stringify(this.$data);
+    },
   },
   methods: {
     onChangeImage(itemIndex, newImageData) {
@@ -108,6 +141,32 @@ export default {
             cacheKey: 'AkktaStudioOffers',
         };
     },
+    loadOffer(event) {
+        const fileReader = new FileReader();
+        const callback = this.onOfferLoaded;
+        fileReader.onloadend = function () {
+            const newOfferJson = fileReader.result;
+            callback(newOfferJson);
+            event.target.value = '';
+        };
+
+        const files = event.target.files;
+        if (files.length > 0) {
+            fileReader.readAsText(files[0]);
+        }
+    },
+    onOfferLoaded(newOfferJson) {
+        const newOfferData = JSON.parse(newOfferJson);
+        for (const key in newOfferData) {
+            this.$data[key] = newOfferData[key];
+        }
+    },
+    clearOffer() {
+        const newOfferData = initialState();
+        for (const key in newOfferData) {
+            this.$data[key] = newOfferData[key];
+        }
+    },
   },
 }
 </script>
@@ -116,6 +175,16 @@ export default {
 .main {
     margin: auto;
     width: 900px;
+}
+
+.menu > * {
+    display: block;
+    width: 300px;
+    margin: 20px 0;
+    border: 1px solid #000;
+    cursor: pointer;
+    padding: 5px;
+    text-align: center;
 }
 
 .content > table {
@@ -133,5 +202,12 @@ export default {
 
 .content > table img {
     height: 150px;
+}
+
+.disabledLink {
+    color: currentColor;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
 }
 </style>
