@@ -51,9 +51,10 @@
                     <tr>
                         <th>Broj</th>
                         <th>Model</th>
-                        <th>Konstrukcija šablona</th>
-                        <th>Izrada makete</th>
-                        <th>Izrada uzorka</th>
+                        <th>Utrošci</th>
+                        <th>Šablon</th>
+                        <th>Maketa</th>
+                        <th>Uzorak</th>
                         <th>Zbir</th>
                     </tr>
                 </thead>
@@ -70,6 +71,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -169,6 +171,7 @@ export default {
     },
     addItem() {
         this.offerItems.push({
+            expenditures: '',
             patternPrice: 0,
             modelPrice: 0,
             samplePrice: 0,
@@ -309,11 +312,12 @@ export default {
 }
 
 .content > table th:nth-child(1) { width: 7.5%; }
-.content > table th:nth-child(2) { width: 25%; }
-.content > table th:nth-child(3) { width: 17.5%; }
-.content > table th:nth-child(4) { width: 17.5%; }
-.content > table th:nth-child(5) { width: 17.5%; }
-.content > table th:nth-child(6) { width: 15%; }
+.content > table th:nth-child(2) { width: 17.5%; }
+.content > table th:nth-child(3) { width: 25%; }
+.content > table th:nth-child(4) { width: 12.5%; }
+.content > table th:nth-child(5) { width: 12.5%; }
+.content > table th:nth-child(6) { width: 12.5%; }
+.content > table th:nth-child(7) { width: 12.5%; }
 
 .contract {
     page-break-inside: avoid;

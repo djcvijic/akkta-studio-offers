@@ -41,7 +41,6 @@ span {
     display: inline-block;
     min-width: 30px;
     border-bottom: 1px dashed gray;
-    text-align: right;
 }
 
 @media print {

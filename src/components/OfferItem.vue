@@ -8,9 +8,18 @@
                 <input type="file" style="display: none;" accept="image/png, image/gif, image/jpeg" @change="onUploadImage"/>
             </label>
         </td>
-        <td><EditableSpan :value="value.patternPrice" @input="newValue => emitInput('patternPrice', newValue)"/> EUR</td>
-        <td><EditableSpan :value="value.modelPrice" @input="newValue => emitInput('modelPrice', newValue)"/> EUR</td>
-        <td><EditableSpan :value="value.samplePrice" @input="newValue => emitInput('samplePrice', newValue)"/> EUR</td>
+        <td>
+          <EditableSpan class="editableString" :value="value.expenditures" @input="newValue => emitString('expenditures', newValue)"/>
+        </td>
+        <td>
+          <EditableSpan class="editableInt" :value="value.patternPrice" @input="newValue => emitInt('patternPrice', newValue)"/> EUR
+        </td>
+        <td>
+          <EditableSpan class="editableInt" :value="value.modelPrice" @input="newValue => emitInt('modelPrice', newValue)"/> EUR
+        </td>
+        <td>
+          <EditableSpan class="editableInt" :value="value.samplePrice" @input="newValue => emitInt('samplePrice', newValue)"/> EUR
+        </td>
         <td>
             {{ value.totalPrice }} EUR
         </td>
@@ -83,6 +92,7 @@ export default {
         type: Object,
         default() {
             return  {
+                expenditures: '',
                 patternPrice: 0,
                 modelPrice: 0,
                 samplePrice: 0,
@@ -129,7 +139,12 @@ export default {
         newImageData.uri = newImageUri
         this.$emit('changeImage', newImageData);
     },
-    emitInput(key, newValue) {
+    emitString(key, newValue) {
+      const newModel = Object.assign({}, this.value);
+      newModel[key] = newValue;
+      this.$emit('input', newModel);
+    },
+    emitInt(key, newValue) {
         const newModel = Object.assign({}, this.value);
         newModel[key] = parseInt(newValue);
         newModel.totalPrice = newModel.patternPrice + newModel.modelPrice + newModel.samplePrice;
@@ -179,5 +194,13 @@ td > label {
     td > label {
         display: none;
     }
+}
+
+.editableString {
+  text-align: left;
+}
+
+.editableInt {
+  text-align: right;
 }
 </style>
