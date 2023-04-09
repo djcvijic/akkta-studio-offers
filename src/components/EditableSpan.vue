@@ -23,7 +23,7 @@ export default {
         this.$refs.editable.innerText = this.value;
     },
     updated() {
-        if (this.value != this.$refs.editable.innerText)
+        if (this.value !== this.$refs.editable.innerText)
         {
             this.$refs.editable.innerText = this.value;
         }

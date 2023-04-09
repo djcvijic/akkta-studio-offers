@@ -2,7 +2,7 @@
     <tr>
         <td>{{ itemIndex + 1 }}</td>
         <td>
-            <img :src="imageData.uri"/>
+            <img :src="imageData.uri" alt=""/>
             <label>
                 Izaberi sliku
                 <input type="file" style="display: none;" accept="image/png, image/gif, image/jpeg" @change="onUploadImage"/>
